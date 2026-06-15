@@ -9,20 +9,48 @@ from summarizer import (
     generate_combined_txt_bytes,
     generate_pdf_bytes_multi,
 )
+
 st.set_page_config(
     page_title="SUMMARIZER.AI",
     page_icon="🤖", 
     layout="wide",
     initial_sidebar_state="expanded"
 )
-st.markdown(, unsafe_allow_html=True)
+
+# Custom CSS for styling
+st.markdown("""
+<style>
+    .header-container {
+        text-align: center;
+        padding: 2rem;
+        background-color: #f0f2f6;
+        border-radius: 10px;
+        margin-bottom: 2rem;
+    }
+    .tagline {
+        color: #555;
+        font-style: italic;
+    }
+    .card-3d {
+        padding: 1.5rem;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        margin-bottom: 1rem;
+    }
+    .card-mint { background-color: #e6fffa; }
+    .card-lavender { background-color: #f3e5f5; }
+</style>
+""", unsafe_allow_html=True)
+
 @st.cache_resource
 def get_model():
     return DocumentSummarizer()
+
 model = get_model()
+
 with st.sidebar:
-    st.markdown("<h2 style='color: 
-    st.markdown("<p style='color: 
+    st.markdown("<h2 style='color: #4A90E2;'>SUMMARIZER.AI</h2>", unsafe_allow_html=True)
+    st.markdown("<p style='color: #666;'>Your AI-powered document assistant</p>", unsafe_allow_html=True)
     st.markdown("---")
     choice = st.selectbox("WORKSPACE", ["HOME", "ANALYTICS", "ABOUT"])
     st.markdown("<br><br>", unsafe_allow_html=True)
@@ -31,7 +59,8 @@ with st.sidebar:
     num_sent = st.slider("DEPTH", 1, 10, 3)
     st.markdown("---")
     st.caption("ENGINE_REF: AI_INTERN_V1.0 🤖")
-if "01_HOME" in choice:
+
+if "HOME" in choice:
     st.markdown('<div class="header-container"><h1>Document Summarization <br> System</h1><p class="tagline">Powered by AI Intern 🤖</p></div>', unsafe_allow_html=True)
     with st.container():
         t1, t2, t3 = st.tabs(["01_TEXT", "02_FILE", "03_BATCH"])
@@ -63,8 +92,8 @@ if "01_HOME" in choice:
                 for f in files:
                     temp_path = f"temp_{f.name}"
                     try:
-                        with open(temp_path, "wb") as f:
-                            f.write(f.getbuffer())
+                        with open(temp_path, "wb") as f_out:
+                            f_out.write(f.getbuffer())
                         text_data = read_file(temp_path)
                         documents_input.append((f.name, text_data))
                     except Exception as e:
@@ -89,17 +118,18 @@ if "01_HOME" in choice:
                 if results:
                     st.session_state['documents'] = results
                     st.session_state['method'] = method
+    
     if 'documents' in st.session_state and st.session_state['documents']:
         st.markdown("<br><br>", unsafe_allow_html=True)
-        st.markdown("
+        st.markdown("### OUTPUT RESULTS")
         for doc in st.session_state['documents']:
             with st.expander(f"DOCUMENT: {doc['name'].upper()}", expanded=True):
                 c1, c2 = st.columns(2, gap="medium")
                 with c1:
-                    st.markdown("<p style='font-weight: 700; color: 
+                    st.markdown("<p style='font-weight: 700; color: #4A90E2;'>ORIGINAL CONTENT</p>", unsafe_allow_html=True)
                     st.markdown(f'<div class="card-3d card-mint" style="font-size: 0.95rem; line-height: 1.6;">{doc["original"][:1200]}...</div>', unsafe_allow_html=True)
                 with c2:
-                    st.markdown("<p style='font-weight: 700; color: 
+                    st.markdown("<p style='font-weight: 700; color: #9C27B0;'>AI SUMMARY</p>", unsafe_allow_html=True)
                     st.markdown(f'<div class="card-3d card-lavender" style="font-size: 0.95rem; line-height: 1.6; font-weight: 500;">{doc["summary"]}</div>', unsafe_allow_html=True)
                 st.markdown("<br>", unsafe_allow_html=True)
                 a1, a2 = st.columns(2)
@@ -108,7 +138,8 @@ if "01_HOME" in choice:
                     a2.download_button("EXPORT_PDF 📑", generate_pdf_bytes(doc['summary']), f"{doc['name']}_CORE.pdf", key=f"p_{doc['name']}")
                 except:
                     pass
-elif "02_ANALYTICS" in choice:
+
+elif "ANALYTICS" in choice:
     st.markdown('<div class="header-container"><h1>DATA<br>METRICS.</h1><p class="tagline">Crunching the numbers for you! 🤓</p></div>', unsafe_allow_html=True)
     docs = st.session_state.get('documents', [])
     if not docs:
@@ -122,9 +153,10 @@ elif "02_ANALYTICS" in choice:
         m2.metric("WORDS 🔤", stats['num_words'])
         m3.metric("TOP KEYWORD 🔑", stats['keywords'][0].upper() if stats['keywords'] else "N/A")
         st.markdown("<br>", unsafe_allow_html=True)
-        st.markdown("
-        st.bar_chart(pd.DataFrame(list(stats['word_freq'].items()), columns=['Word', 'Count']).set_index('Word'), color="
+        st.markdown("### WORD FREQUENCY")
+        st.bar_chart(pd.DataFrame(list(stats['word_freq'].items()), columns=['Word', 'Count']).set_index('Word'))
+
 else:
     st.markdown('<div class="header-container"><h1>ABOUT<br>SYSTEM.</h1><p class="tagline">Technical Specifications 🛠️</p></div>', unsafe_allow_html=True)
-    st.markdown()
+    st.markdown("### SYSTEM INFO")
     st.info("SYSTEM_STATUS: OPERATIONAL AND READY TO ASSIST! 🫡")
