@@ -202,7 +202,7 @@ if choice == "Home":
     st.markdown('<div class="header-section"><h1>Document Summarization System </h1><p class="tagline">AI-Powered: 3D Intelligent Summarization Platform</p></div>', unsafe_allow_html=True)
     
     with st.container():
-        st.markdown('<div class="neu-container">', unsafe_allow_html=True)
+        
         t1, t2, t3 = st.tabs(["Manual Input", "File Upload", "Batch Mode"])
         documents_input = []
         
