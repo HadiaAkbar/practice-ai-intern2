@@ -13,180 +13,162 @@ from summarizer import (
 # Page configuration
 st.set_page_config(
     page_title="SUMMARIZER.AI",
-    page_icon="🧬", 
+    page_icon="🕊️", 
     layout="wide",
     initial_sidebar_state="expanded"
 )
 
-# High-Fidelity Realistic UI CSS
+# Elegant Modern Pastel CSS
 st.markdown("""
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap');
     
     :root {
-        --bg-main: #F8F9FB;
-        --charcoal: #333333;
-        --slate: #4A5568;
-        --soft-blue: #EBF8FF;
-        --glass-white: rgba(255, 255, 255, 0.9);
-        --accent-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        --bg-color: #FAFAFA;
+        --text-color: #4A4A4A;
+        --text-light: #7D7D7D;
+        --pastel-blue: #EBF1FF;
+        --pastel-purple: #F3EBFF;
+        --pastel-pink: #FFEBF1;
+        --pastel-green: #EBFFFA;
+        --white: #FFFFFF;
+        --border-soft: #F0F0F0;
     }
 
     html, body, [class*="css"] {
-        font-family: 'Plus Jakarta Sans', sans-serif;
-        color: var(--charcoal);
-        background-color: var(--bg-main);
+        font-family: 'Inter', sans-serif;
+        color: var(--text-color);
+        background-color: var(--bg-color);
     }
 
-    /* Multi-layered Realistic Shadow */
-    .realistic-depth {
-        box-shadow: 
-            0 1px 3px rgba(0,0,0,0.02),
-            0 10px 15px -3px rgba(0,0,0,0.03),
-            0 4px 6px -2px rgba(0,0,0,0.01);
+    /* Elegant Typography */
+    h1, h2, h3 {
+        font-family: 'Playfair Display', serif;
+        font-weight: 700;
+        color: #2C2C2C;
     }
 
-    /* Realistic Glass Container */
-    .glass-card {
-        background: var(--glass-white);
-        backdrop-filter: blur(12px);
-        border: 1px solid rgba(255, 255, 255, 0.6);
-        border-radius: 24px;
-        padding: 2rem;
-        box-shadow: 
-            0 4px 6px -1px rgba(0, 0, 0, 0.05), 
-            0 2px 4px -1px rgba(0, 0, 0, 0.03),
-            inset 0 1px 0 rgba(255, 255, 255, 0.8);
-        margin-bottom: 2rem;
-    }
-
-    /* Hero Section with Light Reflection */
-    .hero-section {
-        padding: 5rem 2rem;
+    /* Airy Header */
+    .header-container {
+        padding: 6rem 2rem 4rem 2rem;
         text-align: center;
-        background: radial-gradient(circle at top right, #FFFFFF, #F8F9FB);
-        border-bottom: 1px solid #E2E8F0;
-        margin-bottom: 3rem;
+        background-color: var(--bg-color);
     }
 
-    .hero-section h1 {
-        font-weight: 800;
-        font-size: 4rem;
-        color: var(--charcoal);
-        letter-spacing: -2px;
-        line-height: 1;
+    .header-container h1 {
+        font-size: 4.5rem;
         margin-bottom: 1rem;
+        letter-spacing: -1px;
     }
 
-    .hero-tagline {
-        color: var(--slate);
-        font-size: 1.25rem;
-        font-weight: 400;
-        max-width: 600px;
-        margin: 0 auto;
+    .tagline {
+        font-family: 'Inter', sans-serif;
+        font-weight: 300;
+        font-size: 1.1rem;
+        color: var(--text-light);
+        letter-spacing: 3px;
+        text-transform: uppercase;
     }
 
     /* Sidebar Refinement */
     [data-testid="stSidebar"] {
-        background-color: #FFFFFF !important;
-        border-right: 1px solid #EDF2F7;
+        background-color: var(--white) !important;
+        border-right: 1px solid var(--border-soft);
     }
 
-    .sidebar-brand {
-        font-weight: 800;
-        font-size: 1.5rem;
-        background: var(--accent-gradient);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
+    .sidebar-logo {
+        font-family: 'Playfair Display', serif;
+        font-size: 2rem;
+        font-weight: 700;
+        color: #2C2C2C;
+        margin-bottom: 3rem;
+    }
+
+    /* Elegant Pastel Cards */
+    .elegant-card {
+        background: var(--white);
+        padding: 3rem;
+        border-radius: 40px;
+        border: 1px solid var(--border-soft);
+        box-shadow: 0 15px 40px rgba(0,0,0,0.02);
         margin-bottom: 2rem;
     }
 
-    /* Realistic Buttons */
+    /* Soft 3D Buttons */
     .stButton>button {
         width: 100%;
-        border-radius: 14px;
-        padding: 0.75rem 1.5rem;
-        background: var(--charcoal);
-        color: #FFFFFF;
-        font-weight: 600;
-        border: 1px solid var(--charcoal);
-        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        border-radius: 100px;
+        padding: 1rem 2rem;
+        background-color: #2C2C2C;
+        color: var(--white);
+        font-weight: 500;
+        border: none;
+        transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.05);
     }
 
     .stButton>button:hover {
-        background: #000000;
-        transform: translateY(-1px);
-        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-        color: #FFFFFF;
+        background-color: #000000;
+        transform: translateY(-2px);
+        box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        color: var(--white);
     }
 
-    /* Realistic Tabs */
+    /* Minimalist Tabs */
     .stTabs [data-baseweb="tab-list"] {
-        gap: 12px;
-        background: #EDF2F7;
-        padding: 6px;
-        border-radius: 16px;
+        gap: 40px;
+        background-color: transparent;
+        border-bottom: 1px solid var(--border-soft);
     }
 
     .stTabs [data-baseweb="tab"] {
-        background: transparent;
-        border-radius: 12px;
-        color: var(--slate);
-        font-weight: 600;
+        height: auto;
+        padding: 15px 0px;
+        background-color: transparent;
+        color: var(--text-light);
+        font-weight: 400;
         border: none;
-        transition: all 0.2s ease;
     }
 
     .stTabs [aria-selected="true"] {
-        background: #FFFFFF !important;
-        color: var(--charcoal) !important;
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        color: #2C2C2C !important;
+        font-weight: 600 !important;
+        border-bottom: 2px solid #2C2C2C !important;
     }
 
     /* Result Panels */
-    .panel-source {
-        background: #F7FAFC;
-        border: 1px solid #E2E8F0;
-        border-radius: 20px;
-        padding: 24px;
-        color: var(--slate);
-        line-height: 1.7;
+    .result-box {
+        padding: 2rem;
+        border-radius: 30px;
+        margin-bottom: 1.5rem;
+        line-height: 1.8;
     }
 
-    .panel-summary {
-        background: #FFFFFF;
-        border: 1px solid #E2E8F0;
-        border-radius: 20px;
-        padding: 24px;
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
-        color: var(--charcoal);
-        font-weight: 500;
-        line-height: 1.7;
+    .source-panel { background-color: var(--pastel-blue); border: 1px solid #DCE6FF; }
+    .summary-panel { background-color: var(--pastel-purple); border: 1px solid #EBDCFF; }
+
+    /* Elegant Metrics */
+    .metric-item {
+        text-align: center;
+        padding: 2rem;
+        background-color: var(--white);
+        border-radius: 30px;
+        border: 1px solid var(--border-soft);
     }
 
-    /* Realistic Metrics */
-    .metric-card {
-        background: #FFFFFF;
-        padding: 1.5rem;
-        border-radius: 20px;
-        border: 1px solid #E2E8F0;
-        text-align: left;
-    }
-
-    .metric-title {
-        font-size: 0.875rem;
+    .metric-label {
+        font-size: 0.75rem;
         font-weight: 600;
-        color: var(--slate);
+        color: var(--text-light);
         text-transform: uppercase;
-        letter-spacing: 0.05em;
+        letter-spacing: 2px;
         margin-bottom: 0.5rem;
     }
 
-    .metric-val {
-        font-size: 2rem;
-        font-weight: 800;
-        color: var(--charcoal);
+    .metric-value {
+        font-family: 'Playfair Display', serif;
+        font-size: 2.5rem;
+        color: #2C2C2C;
     }
 
 </style>
@@ -200,27 +182,27 @@ model = get_model()
 
 # Sidebar
 with st.sidebar:
-    st.markdown('<div class="sidebar-brand">SUMMARIZER.AI</div>', unsafe_allow_html=True)
+    st.markdown('<div class="sidebar-logo">Summarizer.</div>', unsafe_allow_html=True)
     choice = st.selectbox("WORKSPACE", ["Home", "Analytics", "About"])
-    st.markdown("<br>", unsafe_allow_html=True)
-    st.markdown("<p style='font-size: 0.75rem; font-weight: 700; color: #A0AEC0; text-transform: uppercase;'>Engine Settings</p>", unsafe_allow_html=True)
+    st.markdown("<br><br>", unsafe_allow_html=True)
+    st.markdown("<p style='font-size: 0.7rem; letter-spacing: 1px; color: var(--text-light); text-transform: uppercase;'>Settings</p>", unsafe_allow_html=True)
     method = st.radio("Method", ["Simple Frequency", "TF-IDF"], label_visibility="collapsed")
     num_sent = st.slider("Depth", 1, 10, 3)
     st.markdown("---")
-    st.caption("AI Intern v4.0 • Realistic Fidelity")
+    st.caption("AI Intern • Fifth Edition")
 
-# Main Interface
+# Main Page
 if choice == "Home":
-    st.markdown('<div class="hero-section"><h1>Distill Complexity.</h1><p class="hero-tagline">A high-fidelity intelligence tool designed to transform long-form content into actionable insights.</p></div>', unsafe_allow_html=True)
+    st.markdown('<div class="header-container"><h1>Knowledge, Refined.</h1><p class="tagline">An elegant AI for the modern reader</p></div>', unsafe_allow_html=True)
     
     with st.container():
-        st.markdown('<div class="glass-card">', unsafe_allow_html=True)
-        t1, t2, t3 = st.tabs(["Manual Input", "File Upload", "Batch Processing"])
+        st.markdown('<div class="elegant-card">', unsafe_allow_html=True)
+        t1, t2, t3 = st.tabs(["Manual Entry", "File Upload", "Batch Mode"])
         documents_input = []
         
         with t1:
             st.markdown("<br>", unsafe_allow_html=True)
-            text_data = st.text_area("INPUT", height=300, placeholder="Enter or paste your text here...", label_visibility="collapsed")
+            text_data = st.text_area("INPUT", height=300, placeholder="Paste your text here...", label_visibility="collapsed")
             if text_data.strip():
                 documents_input = [("Manual Entry", text_data)]
         
@@ -235,7 +217,7 @@ if choice == "Home":
                     text_data = read_file(temp_path)
                     documents_input = [(file.name, text_data)]
                 except Exception as e:
-                    st.error(f"Processing Error: {e}")
+                    st.error(f"Error: {e}")
                 finally:
                     if os.path.exists(temp_path):
                         os.remove(temp_path)
@@ -252,7 +234,7 @@ if choice == "Home":
                         text_data = read_file(temp_path)
                         documents_input.append((f.name, text_data))
                     except Exception as e:
-                        st.error(f"Batch Error: {e}")
+                        st.error(f"Error: {e}")
                     finally:
                         if os.path.exists(temp_path):
                             os.remove(temp_path)
@@ -263,7 +245,7 @@ if choice == "Home":
     with c_btn:
         if st.button("Generate Summary"):
             if not documents_input:
-                st.warning("Please provide input content.")
+                st.warning("Please provide some input.")
             else:
                 with st.spinner("Analyzing..."):
                     results = []
@@ -273,23 +255,23 @@ if choice == "Home":
                             if res.strip():
                                 results.append({"name": name, "original": text, "summary": res})
                         except Exception as e:
-                            st.error(f"Analysis Error: {e}")
+                            st.error(f"Error: {e}")
                     if results:
                         st.session_state['documents'] = results
                         st.session_state['method'] = method
 
     if 'documents' in st.session_state and st.session_state['documents']:
         st.markdown("<br><br>", unsafe_allow_html=True)
-        st.markdown("<h3 style='font-weight: 800; letter-spacing: -1px;'>Analysis Output</h3>", unsafe_allow_html=True)
+        st.markdown("<h3>Analysis Report</h3>", unsafe_allow_html=True)
         for doc in st.session_state['documents']:
             with st.expander(f"Report: {doc['name']}", expanded=True):
                 c1, c2 = st.columns(2, gap="large")
                 with c1:
-                    st.markdown("<p style='font-size: 0.75rem; font-weight: 800; color: #718096; text-transform: uppercase; margin-bottom: 12px;'>Source Content</p>", unsafe_allow_html=True)
-                    st.markdown(f'<div class="panel-source">{doc["original"][:1500]}...</div>', unsafe_allow_html=True)
+                    st.markdown("<p style='font-size: 0.7rem; letter-spacing: 1px; color: var(--text-light); text-transform: uppercase; margin-bottom: 1rem;'>Original Content</p>", unsafe_allow_html=True)
+                    st.markdown(f'<div class="result-box source-panel">{doc["original"][:1500]}...</div>', unsafe_allow_html=True)
                 with c2:
-                    st.markdown("<p style='font-size: 0.75rem; font-weight: 800; color: #4A5568; text-transform: uppercase; margin-bottom: 12px;'>AI Core Summary</p>", unsafe_allow_html=True)
-                    st.markdown(f'<div class="panel-summary">{doc["summary"]}</div>', unsafe_allow_html=True)
+                    st.markdown("<p style='font-size: 0.7rem; letter-spacing: 1px; color: var(--text-light); text-transform: uppercase; margin-bottom: 1rem;'>AI Core Summary</p>", unsafe_allow_html=True)
+                    st.markdown(f'<div class="result-box summary-panel" style="font-weight: 500;">{doc["summary"]}</div>', unsafe_allow_html=True)
                 
                 st.markdown("<br>", unsafe_allow_html=True)
                 a1, a2, _ = st.columns([1, 1, 2])
@@ -300,10 +282,10 @@ if choice == "Home":
                     pass
 
 elif choice == "Analytics":
-    st.markdown('<div class="hero-section"><h1>Data Intelligence.</h1><p class="hero-tagline">Quantifying linguistic patterns and keyword distributions.</p></div>', unsafe_allow_html=True)
+    st.markdown('<div class="header-container"><h1>Data Insights.</h1><p class="tagline">The science of summarization</p></div>', unsafe_allow_html=True)
     docs = st.session_state.get('documents', [])
     if not docs:
-        st.info("No active analysis. Please run a summary on the Home page.")
+        st.info("Run a summary on the Home page to see insights.")
     else:
         selected = st.selectbox("Select Document", [d['name'] for d in docs])
         doc = next(d for d in docs if d['name'] == selected)
@@ -311,28 +293,26 @@ elif choice == "Analytics":
         
         m1, m2, m3 = st.columns(3)
         with m1:
-            st.markdown(f'<div class="metric-card"><p class="metric-title">Sentences</p><p class="metric-val">{stats["num_sentences"]}</p></div>', unsafe_allow_html=True)
+            st.markdown(f'<div class="metric-item"><p class="metric-label">Sentences</p><p class="metric-value">{stats["num_sentences"]}</p></div>', unsafe_allow_html=True)
         with m2:
-            st.markdown(f'<div class="metric-card"><p class="metric-title">Word Count</p><p class="metric-val">{stats["num_words"]}</p></div>', unsafe_allow_html=True)
+            st.markdown(f'<div class="metric-item"><p class="metric-label">Words</p><p class="metric-value">{stats["num_words"]}</p></div>', unsafe_allow_html=True)
         with m3:
-            st.markdown(f'<div class="metric-card"><p class="metric-title">Primary Keyword</p><p class="metric-val" style="font-size: 1.25rem; padding-top: 10px;">{stats["keywords"][0].upper() if stats["keywords"] else "N/A"}</p></div>', unsafe_allow_html=True)
+            st.markdown(f'<div class="metric-item"><p class="metric-label">Primary Keyword</p><p class="metric-value" style="font-size: 1.5rem; padding-top: 10px;">{stats["keywords"][0].upper() if stats["keywords"] else "N/A"}</p></div>', unsafe_allow_html=True)
         
         st.markdown("<br><br>", unsafe_allow_html=True)
-        st.markdown("<h4 style='font-weight: 700;'>Frequency Distribution</h4>", unsafe_allow_html=True)
+        st.markdown("<h3>Frequency Analysis</h3>", unsafe_allow_html=True)
         st.bar_chart(pd.DataFrame(list(stats['word_freq'].items()), columns=['Word', 'Count']).set_index('Word'))
 
 else:
-    st.markdown('<div class="hero-section"><h1>Technical Specs.</h1><p class="hero-tagline">Architectural overview of the summarization engine.</p></div>', unsafe_allow_html=True)
+    st.markdown('<div class="header-container"><h1>System.</h1><p class="tagline">Under the hood</p></div>', unsafe_allow_html=True)
     st.markdown("""
-    <div class="glass-card">
-        <h4 style="font-weight: 700; margin-bottom: 1rem;">Engine Architecture</h4>
-        <p style="color: var(--slate); line-height: 1.6;">
-            The system employs a dual-model extractive approach. <b>Frequency Analysis</b> prioritizes sentences containing globally significant terms, 
-            while the <b>TF-IDF Vectorizer</b> uses statistical weighting to identify unique semantic markers across the document structure.
+    <div class="elegant-card">
+        <h3>Architecture</h3>
+        <p style="color: var(--text-light); line-height: 1.8;">
+            This platform uses a custom implementation of extractive summarization algorithms, leveraging statistical term weighting and frequency distribution 
+            to identify the core essence of any given document.
         </p>
-        <hr style="border: 0; border-top: 1px solid #E2E8F0; margin: 2rem 0;">
-        <p style="font-size: 0.875rem; color: #A0AEC0;">
-            Build 4.0.2 • High Fidelity Realistic UI • Stable Release
-        </p>
+        <br>
+        <p style="font-size: 0.8rem; color: var(--text-light);">Build 5.0 • Modern Elegant Edition</p>
     </div>
     """, unsafe_allow_html=True)
