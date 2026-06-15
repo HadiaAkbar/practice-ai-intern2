@@ -200,7 +200,7 @@ with st.sidebar:
 
 # Main Page
 if choice == "Home":
-    st.markdown('<div class="header-section"><h1>Distill Content.</h1><p class="tagline">3D Intelligent Summarization Platform</p></div>', unsafe_allow_html=True)
+    st.markdown('<div class="header-section"><h1>ocument Summarization System </h1><p class="tagline">AI-Powered: 3D Intelligent Summarization Platform</p></div>', unsafe_allow_html=True)
     
     with st.container():
         st.markdown('<div class="neu-container">', unsafe_allow_html=True)
