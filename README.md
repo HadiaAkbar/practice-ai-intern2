@@ -11,6 +11,9 @@ A Streamlit web app that automatically summarizes long text documents into short
 meaningful summaries while preserving key information. The app supports extractive
 summarization using two scoring strategies and provides analytics on the input text.
 
+## Link
+https://practice-ai-intern2-vzcj9jjtfdwqkev6u86oyv.streamlit.app/
+
 ## Features
 
 ### 1. Data Input
